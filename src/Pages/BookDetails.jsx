@@ -26,30 +26,10 @@ const BookDetails = () => {
     yearOfPublishing,
   } = expectedBook;
 
-  const bookContext = useContext(BookContext);
-  console.log(bookContext);
+  const {handleMarkAsRead, storedBooks, handleWishList} = useContext(BookContext);
+  console.log(handleMarkAsRead, storedBooks);
 
-  const [storedBooks, setStoredBooks] = useState([]);
-
-  const handleMarkAsRead = (currentBook) =>{
-    //store book id or store book object
-    //where to store
-    //array or collection
-    //if the book is already exist then show a toast or alert
-    // if not then add the book in the array or collection
-    console.log(currentBook);
-
-    const isExistBook = storedBooks.find(book => book.bookId === currentBook.bookId);
-
-    if(isExistBook){
-        alert("The Book is Already Exist");
-    }
-    else{
-        setStoredBooks([...storedBooks, currentBook]);
-    }
-
-
-  }
+  
 
   return (
     <div className="grid grid-cols-2 lg:card-side bg-base-100 shadow-sm container mx-auto p-8">
@@ -85,7 +65,7 @@ const BookDetails = () => {
             <span>{yearOfPublishing}</span>
           </div>
           <div className="flex items-center gap-2">
-            <button className="btn btn-primary">Wishlist</button>
+            <button onClick={() => handleWishList(expectedBook)} className="btn btn-primary">Wishlist</button>
             <button onClick={() => handleMarkAsRead(expectedBook)} className="btn btn-primary">Mark as Read</button>
           </div>
         </div>
